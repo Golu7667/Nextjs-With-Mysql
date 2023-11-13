@@ -17,6 +17,7 @@ function PostForm() {
         });
   
         if (response.status === 200) {
+          window.alert("hi")
           // Successful creation of the post
           // You can redirect to the post's details page or update the post list
           // Example: router.push('/posts');

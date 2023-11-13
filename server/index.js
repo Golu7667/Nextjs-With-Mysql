@@ -10,18 +10,20 @@ const dbConfig = {
   password: 'Admin',
   database: 'your-mysql-database',
 };
-
-const pool = mysql.createPool(dbConfig);
+ 
+const pool = mysql.createPool(dbConfig); 
 
 // Create a new post
 app.post('/api/posts', async (req, res) => {
-  const { title, content } = req.body;
+  const { username, email,password } = req.body;
+ 
   const connection = await pool.getConnection();
-  try {
+ 
+  try {   
     const [result] = await connection.query(
-      'INSERT INTO posts (title, content) VALUES (?, ?)',
-      ["title", "content"]
+      `INSERT INTO user (username, email,password) VALUES ('JohnDoe', 'johndoe@email.com','1234567')`
     );
+    console.log(result)
     res.json({ id: result.insertId });
   } catch (error) {
     console.error(error);
@@ -49,5 +51,5 @@ app.get('/api/posts/:id', async (req, res) => {
 });
 
 app.listen(8000, () => {
-  console.log('Server is running on port 3001');
+  console.log('Server is running on port 8000');
 });

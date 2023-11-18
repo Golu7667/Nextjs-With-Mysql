@@ -7,6 +7,7 @@ function index() {
   const [name,setName]=useState("")
 console.log(name)
  const handelSave=async()=>{
+  console.log("handleSave")
     try {
          const save=await axios.post("http://localhost:8000/api/posts",{name})
         if(save){
@@ -25,7 +26,7 @@ console.log(name)
         <Text fontSize="3xl" fontWeight="bold">Enter Name</Text>
         <HStack>
        <Input w="300px" placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} value={name}/>
-       <Button onClick={()=>handelSave}>Save</Button>
+       <Button onClick={()=>handelSave()}>Save</Button>
        </HStack>
        </VStack>
 

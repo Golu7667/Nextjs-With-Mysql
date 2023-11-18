@@ -16,12 +16,12 @@ const pool = mysql.createPool(dbConfig);
 // Create a new post
 app.post('/api/posts', async (req, res) => {
   const {name } = req.body;
- 
+ console.log(name)
   const connection = await pool.getConnection();
  
   try {   
     const [result] = await connection.query(
-      `INSERT INTO user (username, email,password) VALUES ('JohnDoe', 'johndoe@email.com','1234567')`
+      `INSERT INTO namedata (name) VALUES (${name})`
     );
     console.log(result)
     res.json({ id: result.insertId });

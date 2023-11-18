@@ -49,9 +49,13 @@ console.log(name)
        </HStack>
        <Box overflowY="auto" w="400px" h="500px"  rounded={'xl'} boxShadow='dark-lg' marginTop={'10px'}>
         <VStack>
-        {nameData.map((data, index) => (
-        <Box key={index}>{data}</Box>
-      ))}
+        {nameData && (
+        <ul>
+          {nameData.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      )}
          
         </VStack>
        </Box>

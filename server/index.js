@@ -41,6 +41,8 @@ try{
   res.send(rows)
 }catch(error){
   res.status(500).json({ error: 'Error creating the post.' });
+}finally {
+  connection.release();
 }
 
 })

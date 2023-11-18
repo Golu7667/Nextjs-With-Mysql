@@ -20,8 +20,13 @@ console.log(name)
         console.log(error)
     }
  }
- useEffect(()=>{
-    
+ useEffect(async()=>{
+    try {
+        const data=await axios.get("http://localhost:8000/api/alldata")
+        console.log(data)
+    }catch(error){
+         console.log(error)
+    }
  },[])
   return (
     <Center w="100vw" >

@@ -15,7 +15,7 @@ const pool = mysql.createPool(dbConfig);
 
 // Create a new post
 app.post('/api/posts', async (req, res) => {
-  const { username, email,password } = req.body;
+  const {name } = req.body;
  
   const connection = await pool.getConnection();
  

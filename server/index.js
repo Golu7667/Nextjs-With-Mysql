@@ -34,6 +34,16 @@ app.post('/api/posts', async (req, res) => {
   }
 });
 
+app.get('/api/alldata',async(req,res)=>{
+  const connection = await pool.getConnection();
+try{
+  const [rows] = await connection.execute('SELECT * FROM namedata');
+  res.send(rows)
+}catch(error){
+  res.status(500).json({ error: 'Error creating the post.' });
+}
+
+})
 
 
 app.listen(8000, () => {

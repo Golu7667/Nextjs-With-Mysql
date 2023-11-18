@@ -6,6 +6,8 @@ import { color } from 'framer-motion'
 
 function index() {
   const [name,setName]=useState("")
+  const [nameData,setNameData]=useState([])
+  
 console.log(name)
  const handelSave=async()=>{
   console.log("handleSave")
@@ -23,7 +25,8 @@ console.log(name)
  useEffect(async()=>{
     try {
         const data=await axios.get("http://localhost:8000/api/alldata")
-        console.log(data)
+        setNameData(data.data)
+     
     }catch(error){
          console.log(error)
     }
@@ -36,7 +39,7 @@ console.log(name)
        <Input w="300px" placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} value={name}/>
        <Button onClick={()=>handelSave() } colorScheme='blue'>Save</Button>
        </HStack>
-       <Box overflowY="auto" w="400px" h="200px"></Box>
+       <Box overflowY="auto" w="400px" h="500px"  rounded={'xl'} boxShadow='dark-lg' marginTop={'10px'}></Box>
        </VStack>
       
     </Center>

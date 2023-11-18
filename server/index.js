@@ -33,22 +33,7 @@ app.post('/api/posts', async (req, res) => {
   }
 });
 
-// Retrieve all posts
-app.get('/api/posts', async (req, res) => {
-  const [rows] = await pool.query('SELECT * FROM posts');
-  res.json(rows);
-});
 
-// Retrieve a single post by ID
-app.get('/api/posts/:id', async (req, res) => {
-  const { id } = req.params;
-  const [row] = await pool.query('SELECT * FROM posts WHERE id = ?', [id]);
-  if (row.length === 0) {
-    res.status(404).json({ error: 'Post not found' });
-  } else {
-    res.json(row[0]);
-  }
-});
 
 app.listen(8000, () => {
   console.log('Server is running on port 8000');

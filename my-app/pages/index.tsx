@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {Input,Center,Text,VStack,Button,HStack} from '@chakra-ui/react'
 import axios from 'axios'
+import { color } from 'framer-motion'
 
 
 function index() {
@@ -23,10 +24,10 @@ console.log(name)
   return (
     <Center w="100vw" >
         <VStack>
-        <Text fontSize="3xl" fontWeight="bold">Enter Name</Text>
+        <Text fontSize="3xl" fontWeight="bold" >Enter Name</Text>
         <HStack>
        <Input w="300px" placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} value={name}/>
-       <Button onClick={()=>handelSave()}>Save</Button>
+       <Button onClick={()=>handelSave() } colorScheme='blue'>Save</Button>
        </HStack>
        </VStack>
 

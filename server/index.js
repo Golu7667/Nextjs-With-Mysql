@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
 const app = express();
+const cors=require("cors")
 
 app.use(express.json());
 
@@ -10,7 +11,9 @@ const dbConfig = {
   password: 'Admin',
   database: 'your-mysql-database',
 };
- 
+
+app.use(cors({origin:"*"}))
+
 const pool = mysql.createPool(dbConfig); 
 
 // Create a new post

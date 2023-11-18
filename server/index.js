@@ -23,9 +23,7 @@ app.post('/api/posts', async (req, res) => {
   const connection = await pool.getConnection();
  
   try {   
-    const [result] = await connection.query(
-      `INSERT INTO namedata (name) VALUES (${name})`
-    );
+    const [result] = await connection.execute('INSERT INTO namedata (name) VALUES (?)', [name])
     console.log(result)
     res.json({ id: result.insertId });
   } catch (error) {

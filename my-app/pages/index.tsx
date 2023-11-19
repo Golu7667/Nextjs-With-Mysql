@@ -1,6 +1,6 @@
 
 import React, { useState,useEffect } from 'react'
-import {Input,Center,Text,VStack,Button,HStack,Box} from '@chakra-ui/react'
+import {Input,Center,Text,VStack,Button,HStack,Box, ButtonGroup} from '@chakra-ui/react'
 import axios from 'axios'
 import { color } from 'framer-motion'
 
@@ -50,11 +50,14 @@ console.log(name)
        <Box overflowY="auto" w="400px" h="500px"  rounded={'xl'} boxShadow='dark-lg' marginTop={'10px'}>
         <VStack>
         {nameData && (
-        <ul>
+        <>
           {nameData.map((item) => (
-            <li key={item.id}>{item.name}</li>
+            <Box key={item.id} w="300px" h="40px" boxShadow='dark-lg' rounded={'xl'} mt="10px">{item.name}
+             <Button>Edit Name</Button>
+             <Button>Delete</Button>
+            </Box>
           ))}
-        </ul>
+        </>
       )}
          
         </VStack>

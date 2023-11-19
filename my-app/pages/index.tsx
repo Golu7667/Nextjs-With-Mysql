@@ -66,15 +66,34 @@ function index() {
         `http://localhost:8000/api/alldata/${id}`,
         { newName }
       );
+      toast({
+        description: "Updated Successfully",
+        status: "success",
+        duration: "5000",
+        isClosable: true,
+      });
       console.log(update.data);
     } catch (error) {
+      toast({
+        description: "Error",
+        status: "error",
+        duration: "5000",
+        isClosable: true,
+      });
       console.error(error);
     }
+    setIsInputDisabled(true);
   };
 
   const handleDelete = (data) => {
     const id = data.id;
   };
+  const handleChange =(data)=>{
+    setIsInputDisabled(false);
+    setNewName(data.name)
+  }
+
+
 
   useEffect(() => {
     console.log("useeffect ");
@@ -89,7 +108,7 @@ function index() {
       }
     };
     fetchData();
-  }, []);
+  }, [handleChange]);
   return (
     <Center w="100vw">
       <VStack>
@@ -147,7 +166,7 @@ function index() {
                     {isInputDisabled ? (
                       <Button
                         colorScheme="blue"
-                        onClick={() => handleEdit(item)}
+                        onClick={() => handleChange(item)}
                       >
                         Edit
                       </Button>

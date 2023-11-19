@@ -20,21 +20,20 @@ function index() {
   const [nameData, setNameData] = useState([]);
   const [isInputDisabled, setIsInputDisabled] = useState(true);
   const toast = useToast();
-  console.log(nameData);
-  console.log(nameData);
-  console.log(name);
+  
+
   const handelSave = async () => {
-    console.log("handleSave");
+    
     try {
       const save = await axios.post("http://localhost:8000/api/posts", {
         name,
       });
       if (save) {
-        console.log(save);
+      
         toast({
           description: "Name Register Successfully",
           status: "success",
-          duration: "5000",
+          duration: 5000,
           isClosable: true,
         });
       } else {
@@ -60,7 +59,7 @@ function index() {
   const handleEdit = async (data) => {
     setIsInputDisabled(false);
     setNewName(data.name)
-    console.log(data.id);
+   
     const id = data.id;
     try {
       const update = await axios.put(
@@ -70,10 +69,10 @@ function index() {
       toast({
         description: "Updated Successfully",
         status: "success",
-        duration: "5000",
+        duration: 5000,
         isClosable: true,
       });
-      console.log(update.data);
+      
     } catch (error) {
       toast({
         description: "Error",
@@ -81,7 +80,7 @@ function index() {
         duration: 5000,
         isClosable: true,
       });
-      console.error(error);
+     
     }
     setIsInputDisabled(true);
   };
@@ -115,12 +114,12 @@ function index() {
 
 
   useEffect(() => {
-    console.log("useeffect ");
+   
     const fetchData = async () => {
-      console.log("fetchdata");
+     
       try {
         const data = await axios.get("http://localhost:8000/api/alldata");
-        console.log(data);
+       
         setNameData(data.data);
       } catch (error) {
         console.log(error);
@@ -128,6 +127,7 @@ function index() {
     };
     fetchData();
   }, [handleChange]);
+  
   return (
     <Center w="100vw">
       <VStack>

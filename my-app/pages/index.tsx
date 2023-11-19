@@ -58,12 +58,13 @@ function index() {
   };
   const handleEdit = async (data) => {
     setIsInputDisabled(false);
+    setNewName(data.name)
     console.log(data.id);
     const id = data.id;
     try {
       const update = await axios.put(
         `http://localhost:8000/api/alldata/${id}`,
-        { newName: "Romar" }
+        { newName }
       );
       console.log(update.data);
     } catch (error) {
@@ -120,24 +121,28 @@ function index() {
                 {nameData.map((item) => (
                   <Box
                     key={item.id}
-                    w="300px"
-                    h="40px"
+                    w="390px"
+                    h="50px"
                     boxShadow="dark-lg"
                     rounded={"xl"}
                     mt="10px"
                     display={"flex"}
                     justifyContent={"space-between"}
-                    gap={'10px'}
-                  >
-                  
+                    px={'10px'}
+                    alignItems={'center'}
+                  > {
+                    !isInputDisabled ?
                     <Input
-  type="text"
-  name={item.name}
-  disabled={isInputDisabled}
-  value={name}
-  defaultValue={`${item.name}+`}
-  onChange={(e) => setName(e.target.value)}
-/>
+                    type="text"
+                    name={newName}
+                    disabled={isInputDisabled}
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                    placeholder="Enter New Name"
+                  /> :
+                   <Text w="100px" fontSize={'md'} fontFamily="fantasy" ml="10px" mt="4px">{item.name}</Text>
+                  }
+                   
 
                     {isInputDisabled ? (
                       <Button
@@ -149,9 +154,10 @@ function index() {
                     ) : (
                       <Button
                         colorScheme="blue"
-                        onClick={() => handleSave(item)}
+                        onClick={() => handleEdit(item)}
+                        mx="10px"
                       >
-                        Save
+                        Update
                       </Button>
                     )}
                     <Button

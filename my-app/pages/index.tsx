@@ -3,13 +3,14 @@ import React, { useState,useEffect } from 'react'
 import {Input,Center,Text,VStack,Button,HStack,Box, useToast} from '@chakra-ui/react'
 import axios from 'axios'
 import { color } from 'framer-motion'
+import constructWithOptions from 'styled-components/dist/constructors/constructWithOptions'
 
 
 function index() {
   const [name,setName]=useState("")
   const [nameData,setNameData]=useState([])
   const toast=useToast()
-
+  console.log(nameData)
   console.log(nameData)
 console.log(name)
  const handelSave=async()=>{
@@ -48,15 +49,20 @@ console.log(name)
     }
     setName("")
  }
-const handleEdit=(data)=>{
+const handleEdit=async(data)=>{
+  console.log(data.id)
   const id=data.id;
-
+   try{
+        const update=await axios.put(`http://localhost:8000/api/edit:${id}`,"Romar")
+   }catch(error){
+    console.log(error)
+   }
 
 
 }
 const handleDelete=(data)=>{
  const id=data.id;
- 
+
 
 }
 
@@ -91,6 +97,7 @@ const handleDelete=(data)=>{
           {nameData.map((item) => (
             <Box key={item.id} w="300px" h="40px" boxShadow='dark-lg' rounded={'xl'} mt="10px" display={'flex'} justifyContent={'space-between'}>
               <Text w="100px" fontSize={'xl'} fontWeight={'extrabold'} fontFamily={'Arvo'} ml={'20px'}>{item.name}</Text>
+              <Text>{item.id}</Text>
              <Button colorScheme='blue' onClick={()=>handleEdit(item)}>Edit</Button>
              <Button colorScheme='blue' onClick={()=>handleDelete(item)}>Delete</Button>
             </Box>

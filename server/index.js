@@ -99,7 +99,7 @@ app.put('/api/alldata/:id', async (req, res) => {
     connection.release();
   }
 });
-app.delete('/api/alldata/:id', async (req, res) => {
+app.delete('/api/data/:id', async (req, res) => {
   const connection = await pool.getConnection();
   try {
     const { id } = req.params;

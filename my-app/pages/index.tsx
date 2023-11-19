@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import { color } from "framer-motion";
 import constructWithOptions from "styled-components/dist/constructors/constructWithOptions";
+import { Erica_One } from "next/font/google";
 
 function index() {
   const [name, setName] = useState("");
@@ -77,7 +78,7 @@ function index() {
       toast({
         description: "Error",
         status: "error",
-        duration: "5000",
+        duration: 5000,
         isClosable: true,
       });
       console.error(error);
@@ -85,8 +86,26 @@ function index() {
     setIsInputDisabled(true);
   };
 
-  const handleDelete = (data) => {
+  const handleDelete = async(data) => {
     const id = data.id;
+    try{
+      const data=await axios.delete(`http://localhost:8000/api/data/${id}`)
+      toast({
+        description:"Deleted Successfully",
+        status:'success',
+        duration: 5000,
+        isClosable:true
+      })
+    }catch(error){
+      toast({
+        description:"Error",
+        status:'error',
+        duration: 5000,
+        isClosable:true
+      })
+      console.log(error)
+    }
+
   };
   const handleChange =(data)=>{
     setIsInputDisabled(false);
@@ -140,7 +159,7 @@ function index() {
                 {nameData.map((item) => (
                   <Box
                     key={item.id}
-                    w="390px"
+                    w="360px"
                     h="50px"
                     boxShadow="dark-lg"
                     rounded={"xl"}

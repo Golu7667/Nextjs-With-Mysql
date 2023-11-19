@@ -1,6 +1,6 @@
 
 import React, { useState,useEffect } from 'react'
-import {Input,Center,Text,VStack,Button,HStack,Box, ButtonGroup} from '@chakra-ui/react'
+import {Input,Center,Text,VStack,Button,HStack,Box, useToast} from '@chakra-ui/react'
 import axios from 'axios'
 import { color } from 'framer-motion'
 
@@ -8,7 +8,8 @@ import { color } from 'framer-motion'
 function index() {
   const [name,setName]=useState("")
   const [nameData,setNameData]=useState([])
-  
+  const toast=useToast()
+
   console.log(nameData)
 console.log(name)
  const handelSave=async()=>{
@@ -18,13 +19,49 @@ console.log(name)
          const save=await axios.post("http://localhost:8000/api/posts",{name})
         if(save){
           console.log(save)
+          toast({
+            description:'Name Register Successfully',
+            status:'success',
+            duration:'5000',
+            isClosable:true
+
+          })
         }else{
           console.log("not save")
+          toast({
+            description:'Name Register Unsuccessfully',
+            status:'error',
+            duration:'5000',
+            isClosable:true
+
+          })
         }
     }catch(error){
         console.log(error)
+        toast({
+          description:'Error',
+          status:'error',
+          duration:'5000',
+          isClosable:true
+
+        })
     }
+    setName("")
  }
+const handleEdit=(data)=>{
+  const id=data.id;
+
+
+
+}
+const handleDelete=(data)=>{
+ const id=data.id;
+ 
+
+}
+
+
+
  useEffect(()=>{
   console.log("useeffect ")
   const fetchData = async () => {
@@ -52,9 +89,10 @@ console.log(name)
         {nameData && (
         <>
           {nameData.map((item) => (
-            <Box key={item.id} w="300px" h="40px" boxShadow='dark-lg' rounded={'xl'} mt="10px">{item.name}
-             <Button>Edit Name</Button>
-             <Button>Delete</Button>
+            <Box key={item.id} w="300px" h="40px" boxShadow='dark-lg' rounded={'xl'} mt="10px" display={'flex'} justifyContent={'space-between'}>
+              <Text w="100px" fontSize={'xl'} fontWeight={'extrabold'} fontFamily={'Arvo'} ml={'20px'}>{item.name}</Text>
+             <Button colorScheme='blue' onClick={()=>handleEdit(item)}>Edit</Button>
+             <Button colorScheme='blue' onClick={()=>handleDelete(item)}>Delete</Button>
             </Box>
           ))}
         </>
